@@ -10,7 +10,12 @@ if (!supabaseUrl || !supabaseAnonKey) {
   );
 }
 
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+// Fall back to placeholder values so createClient doesn't throw when env vars
+// aren't configured yet. Auth/DB calls will simply fail gracefully at runtime.
+export const supabase = createClient(
+  supabaseUrl || 'https://placeholder.supabase.co',
+  supabaseAnonKey || 'placeholder-anon-key'
+);
 
 /**
  * Returns the currently authenticated user, or null if not signed in.

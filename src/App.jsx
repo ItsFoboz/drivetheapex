@@ -1,7 +1,10 @@
 import React, { Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import Layout from '@/components/layout/Layout'
-import ProtectedRoute from '@/components/admin/ProtectedRoute'
+
+// Lazy-load ProtectedRoute so supabase.js isn't pulled into the main bundle
+// at startup (avoids createClient crash before env vars are available)
+const ProtectedRoute = lazy(() => import('@/components/admin/ProtectedRoute'))
 
 // Public pages
 const HomePage = lazy(() => import('@/pages/HomePage'))
