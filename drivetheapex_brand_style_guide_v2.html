@@ -1,0 +1,426 @@
+
+<style>
+  :root {
+    --dta-black: #0E0E0E;
+    --dta-surface: #161616;
+    --dta-card: #1E1E1E;
+    --dta-border: rgba(255,255,255,0.08);
+    --dta-border-mid: rgba(255,255,255,0.14);
+    --dta-red: #CE4F37;
+    --dta-red-hover: #D95C42;
+    --dta-white: #E0DDD6;
+    --dta-muted: #888580;
+    --dta-subtle: #3A3A3A;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  .guide{background:var(--dta-black);border-radius:12px;overflow:hidden;font-family:var(--font-sans);}
+
+  /* HERO */
+  .hero{background:var(--dta-black);padding:48px 40px 36px;border-bottom:1px solid var(--dta-border);position:relative;overflow:hidden;}
+  .hero::before{content:'';position:absolute;top:-80px;right:-80px;width:360px;height:360px;background:radial-gradient(circle,rgba(206,79,55,0.10) 0%,transparent 70%);pointer-events:none;}
+  .hero-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:20px;}
+  .hero-logo-row{display:flex;align-items:center;gap:20px;margin-bottom:14px;}
+  .hero-desc{font-size:13px;color:var(--dta-muted);letter-spacing:0.02em;line-height:1.6;}
+
+  /* SECTIONS */
+  .section{padding:36px 40px;border-bottom:1px solid var(--dta-border);}
+  .section:last-child{border-bottom:none;}
+  .section-label{font-size:10px;letter-spacing:0.18em;text-transform:uppercase;color:var(--dta-red);margin-bottom:24px;display:flex;align-items:center;gap:10px;}
+  .section-label::after{content:'';flex:1;height:1px;background:var(--dta-border);}
+
+  /* GRIDS */
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .grid-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+  .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
+
+  /* COLOR SWATCHES */
+  .color-swatch{border-radius:8px;overflow:hidden;border:1px solid var(--dta-border);}
+  .swatch-block{height:72px;}
+  .swatch-info{background:var(--dta-card);padding:10px 12px;}
+  .swatch-name{font-size:11px;font-weight:600;color:var(--dta-white);letter-spacing:0.04em;}
+  .swatch-hex{font-size:10px;color:var(--dta-muted);font-family:var(--font-mono);margin-top:2px;}
+  .swatch-role{font-size:10px;color:var(--dta-muted);margin-top:3px;}
+
+  /* TYPE */
+  .type-row{padding:16px 0;border-bottom:1px solid var(--dta-border);display:flex;align-items:baseline;gap:20px;}
+  .type-row:last-child{border-bottom:none;}
+  .type-meta{width:140px;flex-shrink:0;}
+  .type-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);}
+  .type-spec{font-size:10px;color:#444;margin-top:3px;font-family:var(--font-mono);line-height:1.5;}
+  .type-sample{flex:1;color:var(--dta-white);}
+  .t-display{font-size:42px;font-weight:800;letter-spacing:-0.03em;line-height:1;font-style:italic;text-transform:uppercase;}
+  .t-h1{font-size:28px;font-weight:700;letter-spacing:-0.02em;line-height:1.1;font-style:italic;}
+  .t-h2{font-size:20px;font-weight:700;letter-spacing:-0.01em;line-height:1.2;}
+  .t-h3{font-size:15px;font-weight:600;letter-spacing:0.01em;}
+  .t-body{font-size:15px;font-weight:400;line-height:1.65;opacity:0.85;}
+  .t-caption{font-size:12px;font-weight:400;letter-spacing:0.02em;color:var(--dta-muted);}
+  .t-label{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--dta-red);}
+
+  /* SPACING */
+  .spacing-row{display:flex;align-items:center;gap:16px;padding:7px 0;}
+  .spacing-bar-wrap{width:180px;}
+  .spacing-bar{background:var(--dta-red);height:8px;border-radius:2px;opacity:0.65;}
+  .spacing-info{font-size:11px;color:var(--dta-muted);font-family:var(--font-mono);width:34px;}
+  .spacing-use{font-size:11px;color:var(--dta-white);opacity:0.55;}
+
+  /* RADIUS */
+  .radius-grid{display:flex;gap:16px;align-items:flex-end;flex-wrap:wrap;}
+  .radius-block{background:var(--dta-card);border:1px solid var(--dta-border-mid);display:flex;align-items:center;justify-content:center;width:80px;height:60px;}
+  .radius-label{font-size:10px;font-family:var(--font-mono);color:var(--dta-muted);text-align:center;margin-top:6px;}
+  .radius-wrap{text-align:center;}
+
+  /* COMPONENTS */
+  .btn-primary{background:var(--dta-red);color:#fff;font-size:13px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:0 20px;height:40px;border-radius:4px;border:none;cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+  .btn-secondary{background:transparent;color:var(--dta-white);font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0 20px;height:40px;border-radius:4px;border:1px solid var(--dta-border-mid);cursor:pointer;display:inline-flex;align-items:center;gap:6px;}
+  .btn-ghost{background:transparent;color:var(--dta-red);font-size:13px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;padding:0 20px;height:40px;border-radius:4px;border:none;cursor:pointer;display:inline-flex;align-items:center;}
+  .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;}
+  .badge-live{background:rgba(206,79,55,0.18);color:#CE4F37;border:1px solid rgba(206,79,55,0.3);}
+  .badge-cat{background:rgba(224,221,214,0.07);color:var(--dta-white);border:1px solid var(--dta-border);}
+  .badge-premium{background:rgba(186,148,40,0.14);color:#D4A82A;border:1px solid rgba(186,148,40,0.22);}
+  .tag-pill{display:inline-flex;align-items:center;padding:4px 12px;border-radius:2px;font-size:10px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;background:transparent;border:1px solid var(--dta-border-mid);color:var(--dta-muted);cursor:pointer;}
+  .tag-pill.active{border-color:var(--dta-red);color:var(--dta-red);}
+  .component-row{display:flex;gap:12px;align-items:center;flex-wrap:wrap;margin-bottom:20px;}
+
+  /* NAV */
+  .nav-mock{background:rgba(14,14,14,0.96);border:1px solid var(--dta-border);border-radius:6px;padding:0 20px;height:56px;display:flex;align-items:center;justify-content:space-between;}
+  .nav-links{display:flex;gap:20px;}
+  .nav-link{font-size:12px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--dta-muted);}
+  .nav-link.active{color:var(--dta-white);}
+
+  /* CARDS */
+  .hero-card{background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;overflow:hidden;padding:24px;position:relative;}
+  .hero-card::before{content:'';position:absolute;left:0;top:0;width:3px;height:100%;background:var(--dta-red);}
+  .news-card{background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;overflow:hidden;}
+  .news-img{height:100px;background:linear-gradient(135deg,#1a1a1a 0%,#2a2a2a 100%);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+  .news-img-accent{position:absolute;bottom:0;left:0;width:3px;height:100%;background:var(--dta-red);}
+  .news-body{padding:12px;}
+  .news-eyebrow{font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--dta-red);margin-bottom:6px;}
+  .news-title{font-size:13px;font-weight:700;color:var(--dta-white);line-height:1.3;margin-bottom:6px;}
+  .news-meta{font-size:10px;color:var(--dta-muted);}
+
+  /* DO/DONT */
+  .do-dont{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+  .do-block{background:rgba(30,60,30,0.3);border:1px solid rgba(60,120,60,0.22);border-radius:6px;padding:14px;}
+  .dont-block{background:rgba(60,20,20,0.3);border:1px solid rgba(120,40,40,0.22);border-radius:6px;padding:14px;}
+  .do-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:8px;color:#5aaa5a;}
+  .dont-label{font-size:9px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;margin-bottom:8px;color:#cc5555;}
+  .do-text{font-size:12px;color:var(--dta-white);line-height:1.55;opacity:0.85;}
+
+  /* TONE */
+  .tone-block{background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;padding:16px;}
+  .tone-head{font-size:11px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-red);margin-bottom:8px;}
+  .tone-text{font-size:13px;color:var(--dta-white);line-height:1.6;opacity:0.82;}
+
+  /* MOTION */
+  .motion-row{display:flex;align-items:center;gap:16px;margin-bottom:8px;}
+  .motion-label{font-size:11px;color:var(--dta-muted);width:80px;flex-shrink:0;font-family:var(--font-mono);}
+  .motion-bar{height:2px;background:var(--dta-border);flex:1;border-radius:1px;position:relative;}
+  .motion-fill{height:100%;background:var(--dta-red);border-radius:1px;}
+  .motion-val{font-size:10px;font-family:var(--font-mono);color:var(--dta-muted);width:38px;}
+
+  /* LOGO GRID */
+  .logo-cell{background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;padding:28px 20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;}
+  .logo-cell-label{font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);}
+  .logo-cell-dark{background:#0E0E0E;border-color:var(--dta-border);}
+  .logo-cell-light{background:#E0DDD6;border-color:rgba(0,0,0,0.1);}
+</style>
+
+<div class="guide">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="hero-label">Brand Style Guide · v1.0 · DriveTheApex</div>
+    <div class="hero-logo-row">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.5 283.5" height="56" style="flex-shrink:0;">
+        <defs><style>.st0{fill:#ce4f37}.st1{fill:#e0ddd6}</style></defs>
+        <path class="st0" d="M17.1,161.8c.8-1.4,1.8-2.3,2.1-3.8l3.3-5.6,3.5-5.7,3.8-6.3,3.9-6.4,5-7.2c5.1-7.2,13.9-13.6,22.1-17.4,6.1-2.7,12.5-4.4,19.3-4.4h24.6c0-.1-10.3,44.8-10.3,44.8l-6.4,28.8h-11.9c0,0,8.4-37.4,8.4-37.4l-24.2,21.2-7.5,6.5c-6.6,5.6-14.3,8.8-23,9.7H7.3c0,.1,9.7-16.8,9.7-16.8ZM24.2,171.5c8-2.4,15.5-6.3,22-12l27.5-23.9,22-19.6h-10.5c-10,0-19.5,2.7-27.6,8.5s-9,7.5-12.3,12.6l-4.1,6.5-16.9,27.9Z"/>
+        <path class="st1" d="M147.1,109.1c3.2,5.1,1.1,14.5-1.6,20.1s-3.4,5.2-6,6.9c-3.2,1.7-6.5,2.7-10.1,2.7h-20.4c0,0,7.7-34,7.7-34h20.3c3.1,0,5.9.9,8.5,2.5l1.6,1.8ZM137.6,127.3c1.8-3.2,2.6-6.5,2.7-10.1,0-2.6-1.9-4.6-4.6-4.6l-12.4-.2-4.3,19.1h11c3-.2,5.8-1.6,7.6-4.2Z"/>
+        <path class="st1" d="M174.7,138.8c-.9.1-1.6-.4-1.5-1.3l-4.7-9.9h-8.9c0,0-2.3,11.2-2.3,11.2h-8.8s3.6-16.1,3.6-16.1l4-17.9h21.3c2.4,0,4.4.6,6.6,1.4l2.6,2.8c1.3,3.1.8,6.4,0,9.5-1.3,4.5-4.6,7.7-9.3,8.4l5.7,11.9h-8.3ZM177.2,119.5c1.5-1.5,1.9-3.8,1.4-5.5s-1.5-1.5-2.5-1.5h-13.1s-1.9,8.5-1.9,8.5h11.9c1.4,0,3.1-.3,4.2-1.4Z"/>
+        <polygon class="st1" points="270.9 125 252 125 250.5 131.6 270.5 131.6 268.8 138.8 240.3 138.8 247.9 104.7 276.1 104.7 274.5 112.3 254.8 112.2 253.3 118.3 272.5 118.2 270.9 125"/>
+        <polygon class="st1" points="235.7 104.7 244.8 104.7 227 132.1 222.8 138.8 213.3 138.8 205.8 104.8 214.4 104.7 219.7 129.6 234.6 106.7 235.7 104.7"/>
+        <polygon class="st1" points="197.6 130 195.7 138.8 187.1 138.8 194.6 104.8 203.3 104.7 197.6 130"/>
+        <polygon class="st1" points="207.6 164.8 188.9 164.8 187.3 171.6 207.3 171.6 205.7 178.8 177.5 178.7 185 144.9 213.5 144.9 211.8 152.4 191.7 152.5 190.1 158.3 209.1 158.2 207.6 164.8"/>
+        <path class="st1" d="M170.3,166.7c-2.3.8-4.5,1-6.8.9h-11.3c0,0-2.4,11.1-2.4,11.1h-8.4s7.6-33.8,7.6-33.8h21c2,0,3.8.4,5.6,1,5,1.9,4,8.8,2.1,13.9s-3.8,5.7-7.3,6.8ZM170.5,156.4c.2-.9.2-2.1-.4-2.7s-1.1-1-2-1h-12.8c0,0-1.9,8.4-1.9,8.4h11.7c2.9-.1,4.9-1.7,5.5-4.7Z"/>
+        <path class="st1" d="M245.4,178.7h-9.8s-5.9-11.2-5.9-11.2l-5.4,5.5-1.6,1.5-4.4,4.2h-9.7s17.7-17.5,17.7-17.5l-5.3-9.5c-.7-2.5-2.4-4.2-3.6-6.7h9.5s6,10.5,6,10.5l5.9-6c.7-.7,1.4-1.3,1.7-2.4,1.1-.4,1.9-1,2.3-2.2h10.4s-11.8,11.6-11.8,11.6l-5.4,5.6,9.2,16.7Z"/>
+        <path class="st1" d="M128.3,172.3h-17.1c0,0-4.5,6.3-4.5,6.3h-9s22.8-33.6,22.8-33.6l10.9-.2,7.1,33.8h-9s-1.1-6.4-1.1-6.4ZM127,165.2l-2.6-12.9-8.7,13.1,11.3-.2Z"/>
+      </svg>
+    </div>
+    <div class="hero-desc">Motorsport media · Formula 1 · Racing culture · High-performance cars<br>Dark only · Visual-first · Editorial-grade · Brand color: #CE4F37</div>
+  </div>
+
+  <!-- COLORS -->
+  <div class="section">
+    <div class="section-label">Color System</div>
+    <div class="grid-4" style="margin-bottom:12px;">
+      <div class="color-swatch"><div class="swatch-block" style="background:#0E0E0E;"></div><div class="swatch-info"><div class="swatch-name">Asphalt</div><div class="swatch-hex">#0E0E0E</div><div class="swatch-role">Canvas / Primary BG</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#161616;"></div><div class="swatch-info"><div class="swatch-name">Pit Lane</div><div class="swatch-hex">#161616</div><div class="swatch-role">Surface / Secondary BG</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#1E1E1E;"></div><div class="swatch-info"><div class="swatch-name">Carbon</div><div class="swatch-hex">#1E1E1E</div><div class="swatch-role">Cards / Elevated BG</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#2C2C2C;"></div><div class="swatch-info"><div class="swatch-name">Tarmac</div><div class="swatch-hex">#2C2C2C</div><div class="swatch-role">Borders / Dividers</div></div></div>
+    </div>
+    <div class="grid-4" style="margin-bottom:14px;">
+      <div class="color-swatch"><div class="swatch-block" style="background:#CE4F37;"></div><div class="swatch-info"><div class="swatch-name">Apex Red</div><div class="swatch-hex">#CE4F37</div><div class="swatch-role">Primary Accent · Brand</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#D95C42;"></div><div class="swatch-info"><div class="swatch-name">Race Red</div><div class="swatch-hex">#D95C42</div><div class="swatch-role">Hover / Active States</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#E0DDD6;"></div><div class="swatch-info"><div class="swatch-name">Paddock White</div><div class="swatch-hex">#E0DDD6</div><div class="swatch-role">Primary Text</div></div></div>
+      <div class="color-swatch"><div class="swatch-block" style="background:#888580;"></div><div class="swatch-info"><div class="swatch-name">Dust</div><div class="swatch-hex">#888580</div><div class="swatch-role">Secondary / Meta Text</div></div></div>
+    </div>
+    <div style="padding:14px;background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;">
+      <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:6px;">Color Ratio Rule</div>
+      <div style="font-size:12px;color:var(--dta-white);opacity:0.8;line-height:1.6;">60% Asphalt/Pit Lane · 30% Carbon/Tarmac surfaces · 10% Apex Red. Red is exclusive to CTAs, live indicators, the brand mark, and active UI states. Nothing else touches it.</div>
+    </div>
+  </div>
+
+  <!-- TYPOGRAPHY -->
+  <div class="section">
+    <div class="section-label">Typography</div>
+    <div class="grid-2" style="margin-bottom:20px;">
+      <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;padding:18px;">
+        <div style="font-size:10px;color:var(--dta-red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Headlines · Display</div>
+        <div style="font-size:26px;font-weight:800;font-style:italic;color:var(--dta-white);letter-spacing:-0.02em;line-height:1;">Barlow Condensed</div>
+        <div style="font-size:11px;color:var(--dta-muted);margin-top:6px;">700 Bold · 800 ExtraBold · Italic for all display use</div>
+      </div>
+      <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;padding:18px;">
+        <div style="font-size:10px;color:var(--dta-red);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;">Body · UI · Labels</div>
+        <div style="font-size:22px;font-weight:400;color:var(--dta-white);line-height:1.3;">Inter</div>
+        <div style="font-size:11px;color:var(--dta-muted);margin-top:6px;">400 Regular · 600 SemiBold · 700 Bold</div>
+      </div>
+    </div>
+    <div class="type-row"><div class="type-meta"><div class="type-label">Display</div><div class="type-spec">Barlow Cond 800 Italic<br>48px / -0.03em / UC</div></div><div class="type-sample"><div class="t-display">RACE DAY</div></div></div>
+    <div class="type-row"><div class="type-meta"><div class="type-label">Heading 1</div><div class="type-spec">Barlow Cond 700 Italic<br>28px / -0.02em</div></div><div class="type-sample"><div class="t-h1">Verstappen Takes Pole in Monaco</div></div></div>
+    <div class="type-row"><div class="type-meta"><div class="type-label">Heading 2</div><div class="type-spec">Barlow Cond 700<br>20px / -0.01em</div></div><div class="type-sample"><div class="t-h2">The Technical Breakdown</div></div></div>
+    <div class="type-row"><div class="type-meta"><div class="type-label">Heading 3</div><div class="type-spec">Inter 600<br>15px / 0.01em</div></div><div class="type-sample"><div class="t-h3">Race Results — Round 8</div></div></div>
+    <div class="type-row"><div class="type-meta"><div class="type-label">Body</div><div class="type-spec">Inter 400<br>15px / lh 1.65</div></div><div class="type-sample"><div class="t-body">The gap between the lead pack and the midfield has grown all weekend. Mercedes found something in the setup, but whether it holds over race distance is the real question.</div></div></div>
+    <div class="type-row"><div class="type-meta"><div class="type-label">Caption / Meta</div><div class="type-spec">Inter 400<br>12px / +0.02em</div></div><div class="type-sample"><div class="t-caption">Bahrain · Round 1 · March 2025 · 3 min read</div></div></div>
+    <div class="type-row" style="border-bottom:none;"><div class="type-meta"><div class="type-label">Label / Tag</div><div class="type-spec">Inter 700<br>10px / +0.14em / UC</div></div><div class="type-sample"><div class="t-label">Formula 1</div></div></div>
+  </div>
+
+  <!-- SPACING + RADIUS -->
+  <div class="section">
+    <div class="section-label">Spacing · Radius</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:12px;">8pt Grid Scale</div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:4px;"></div></div><div class="spacing-info">4px</div><div class="spacing-use">icon gap / micro</div></div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:8px;"></div></div><div class="spacing-info">8px</div><div class="spacing-use">intra-component</div></div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:16px;"></div></div><div class="spacing-info">16px</div><div class="spacing-use">card padding</div></div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:24px;"></div></div><div class="spacing-info">24px</div><div class="spacing-use">section internal</div></div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:32px;"></div></div><div class="spacing-info">32px</div><div class="spacing-use">between components</div></div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:48px;"></div></div><div class="spacing-info">48px</div><div class="spacing-use">section gap</div></div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:64px;"></div></div><div class="spacing-info">64px</div><div class="spacing-use">page section break</div></div>
+        <div class="spacing-row"><div class="spacing-bar-wrap"><div class="spacing-bar" style="width:96px;"></div></div><div class="spacing-info">96px</div><div class="spacing-use">hero / full-bleed</div></div>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:14px;">Border Radius Scale</div>
+        <div class="radius-grid">
+          <div class="radius-wrap"><div class="radius-block" style="border-radius:2px;"><span style="font-size:12px;color:var(--dta-muted);">2</span></div><div class="radius-label">2px<br>badges</div></div>
+          <div class="radius-wrap"><div class="radius-block" style="border-radius:4px;"><span style="font-size:12px;color:var(--dta-muted);">4</span></div><div class="radius-label">4px<br>buttons<br>inputs</div></div>
+          <div class="radius-wrap"><div class="radius-block" style="border-radius:6px;"><span style="font-size:12px;color:var(--dta-muted);">6</span></div><div class="radius-label">6px<br>cards</div></div>
+          <div class="radius-wrap"><div class="radius-block" style="border-radius:10px;"><span style="font-size:12px;color:var(--dta-muted);">10</span></div><div class="radius-label">10px<br>modals</div></div>
+        </div>
+        <div style="margin-top:20px;font-size:11px;color:var(--dta-muted);line-height:1.65;">Sharp-leaning system. The brand aesthetic is mechanical and editorial, not consumer-friendly. Keep radius tight. Never exceed 10px on any container. No pill-shaped buttons.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPONENTS -->
+  <div class="section">
+    <div class="section-label">Components</div>
+
+    <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:12px;">Buttons · 40px height</div>
+    <div class="component-row" style="margin-bottom:24px;">
+      <button class="btn-primary">Watch Now</button>
+      <button class="btn-secondary">Read More</button>
+      <button class="btn-ghost">View All</button>
+      <button class="btn-primary" style="background:transparent;border:1px solid #CE4F37;color:#CE4F37;">Subscribe</button>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:12px;">Badges · Status</div>
+    <div class="component-row" style="gap:8px;margin-bottom:24px;">
+      <span class="badge badge-live">&#9679; Live</span>
+      <span class="badge badge-cat">Formula 1</span>
+      <span class="badge badge-cat">Opinion</span>
+      <span class="badge badge-cat">Race Report</span>
+      <span class="badge badge-cat">Technical</span>
+      <span class="badge badge-premium">&#9733; Premium</span>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:12px;">Filter Tags</div>
+    <div class="component-row" style="gap:8px;margin-bottom:28px;">
+      <button class="tag-pill active">All</button>
+      <button class="tag-pill">F1</button>
+      <button class="tag-pill">Cars</button>
+      <button class="tag-pill">Culture</button>
+      <button class="tag-pill">Video</button>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:12px;">Navigation</div>
+    <div class="nav-mock" style="margin-bottom:28px;">
+      <div style="display:flex;align-items:center;gap:32px;">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.5 283.5" height="28">
+          <defs><style>.nn0{fill:#ce4f37}.nn1{fill:#e0ddd6}</style></defs>
+          <path class="nn0" d="M17.1,161.8c.8-1.4,1.8-2.3,2.1-3.8l3.3-5.6,3.5-5.7,3.8-6.3,3.9-6.4,5-7.2c5.1-7.2,13.9-13.6,22.1-17.4,6.1-2.7,12.5-4.4,19.3-4.4h24.6c0-.1-10.3,44.8-10.3,44.8l-6.4,28.8h-11.9c0,0,8.4-37.4,8.4-37.4l-24.2,21.2-7.5,6.5c-6.6,5.6-14.3,8.8-23,9.7H7.3c0,.1,9.7-16.8,9.7-16.8ZM24.2,171.5c8-2.4,15.5-6.3,22-12l27.5-23.9,22-19.6h-10.5c-10,0-19.5,2.7-27.6,8.5s-9,7.5-12.3,12.6l-4.1,6.5-16.9,27.9Z"/>
+          <path class="nn1" d="M147.1,109.1c3.2,5.1,1.1,14.5-1.6,20.1s-3.4,5.2-6,6.9c-3.2,1.7-6.5,2.7-10.1,2.7h-20.4c0,0,7.7-34,7.7-34h20.3c3.1,0,5.9.9,8.5,2.5l1.6,1.8ZM137.6,127.3c1.8-3.2,2.6-6.5,2.7-10.1,0-2.6-1.9-4.6-4.6-4.6l-12.4-.2-4.3,19.1h11c3-.2,5.8-1.6,7.6-4.2Z"/>
+          <path class="nn1" d="M174.7,138.8c-.9.1-1.6-.4-1.5-1.3l-4.7-9.9h-8.9c0,0-2.3,11.2-2.3,11.2h-8.8s3.6-16.1,3.6-16.1l4-17.9h21.3c2.4,0,4.4.6,6.6,1.4l2.6,2.8c1.3,3.1.8,6.4,0,9.5-1.3,4.5-4.6,7.7-9.3,8.4l5.7,11.9h-8.3ZM177.2,119.5c1.5-1.5,1.9-3.8,1.4-5.5s-1.5-1.5-2.5-1.5h-13.1s-1.9,8.5-1.9,8.5h11.9c1.4,0,3.1-.3,4.2-1.4Z"/>
+          <polygon class="nn1" points="270.9 125 252 125 250.5 131.6 270.5 131.6 268.8 138.8 240.3 138.8 247.9 104.7 276.1 104.7 274.5 112.3 254.8 112.2 253.3 118.3 272.5 118.2 270.9 125"/>
+          <polygon class="nn1" points="235.7 104.7 244.8 104.7 227 132.1 222.8 138.8 213.3 138.8 205.8 104.8 214.4 104.7 219.7 129.6 234.6 106.7 235.7 104.7"/>
+          <polygon class="nn1" points="197.6 130 195.7 138.8 187.1 138.8 194.6 104.8 203.3 104.7 197.6 130"/>
+        </svg>
+        <div class="nav-links">
+          <div class="nav-link active">News</div>
+          <div class="nav-link">Videos</div>
+          <div class="nav-link">Race Hub</div>
+          <div class="nav-link">Culture</div>
+        </div>
+      </div>
+      <button class="btn-primary" style="height:32px;font-size:11px;padding:0 14px;">Premium</button>
+    </div>
+
+    <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:12px;">Content Cards</div>
+    <div class="grid-2">
+      <div class="hero-card">
+        <div style="font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--dta-red);margin-bottom:10px;">&#9679; Breaking · Formula 1</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-0.02em;color:var(--dta-white);line-height:1.1;font-style:italic;margin-bottom:12px;">Mercedes Find Half a Second Overnight in Monaco</div>
+        <div style="font-size:11px;color:var(--dta-muted);">Hristo Chernev · 12 min read · Monaco GP</div>
+      </div>
+      <div class="grid-2">
+        <div class="news-card">
+          <div class="news-img"><div style="font-size:22px;color:var(--dta-muted);">&#9654;</div><div class="news-img-accent"></div></div>
+          <div class="news-body"><div class="news-eyebrow">Video</div><div class="news-title">FP2 Fastest Laps Breakdown</div><div class="news-meta">6 min · Today</div></div>
+        </div>
+        <div class="news-card">
+          <div class="news-img" style="background:linear-gradient(135deg,#1c1212,#2a1a1a);"><div style="font-size:22px;">&#128247;</div><div class="news-img-accent"></div></div>
+          <div class="news-body"><div class="news-eyebrow">Gallery</div><div class="news-title">Pit Lane Access: Friday Build</div><div class="news-meta">24 photos · Monaco</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGO SYSTEM -->
+  <div class="section">
+    <div class="section-label">Logo System</div>
+    <div class="grid-3" style="margin-bottom:16px;">
+
+      <!-- Full lockup on dark -->
+      <div class="logo-cell logo-cell-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.5 283.5" width="180">
+          <defs><style>.a0{fill:#ce4f37}.a1{fill:#e0ddd6}</style></defs>
+          <path class="a0" d="M17.1,161.8c.8-1.4,1.8-2.3,2.1-3.8l3.3-5.6,3.5-5.7,3.8-6.3,3.9-6.4,5-7.2c5.1-7.2,13.9-13.6,22.1-17.4,6.1-2.7,12.5-4.4,19.3-4.4h24.6c0-.1-10.3,44.8-10.3,44.8l-6.4,28.8h-11.9c0,0,8.4-37.4,8.4-37.4l-24.2,21.2-7.5,6.5c-6.6,5.6-14.3,8.8-23,9.7H7.3c0,.1,9.7-16.8,9.7-16.8ZM24.2,171.5c8-2.4,15.5-6.3,22-12l27.5-23.9,22-19.6h-10.5c-10,0-19.5,2.7-27.6,8.5s-9,7.5-12.3,12.6l-4.1,6.5-16.9,27.9Z"/>
+          <path class="a1" d="M147.1,109.1c3.2,5.1,1.1,14.5-1.6,20.1s-3.4,5.2-6,6.9c-3.2,1.7-6.5,2.7-10.1,2.7h-20.4c0,0,7.7-34,7.7-34h20.3c3.1,0,5.9.9,8.5,2.5l1.6,1.8ZM137.6,127.3c1.8-3.2,2.6-6.5,2.7-10.1,0-2.6-1.9-4.6-4.6-4.6l-12.4-.2-4.3,19.1h11c3-.2,5.8-1.6,7.6-4.2Z"/>
+          <path class="a1" d="M174.7,138.8c-.9.1-1.6-.4-1.5-1.3l-4.7-9.9h-8.9c0,0-2.3,11.2-2.3,11.2h-8.8s3.6-16.1,3.6-16.1l4-17.9h21.3c2.4,0,4.4.6,6.6,1.4l2.6,2.8c1.3,3.1.8,6.4,0,9.5-1.3,4.5-4.6,7.7-9.3,8.4l5.7,11.9h-8.3ZM177.2,119.5c1.5-1.5,1.9-3.8,1.4-5.5s-1.5-1.5-2.5-1.5h-13.1s-1.9,8.5-1.9,8.5h11.9c1.4,0,3.1-.3,4.2-1.4Z"/>
+          <polygon class="a1" points="270.9 125 252 125 250.5 131.6 270.5 131.6 268.8 138.8 240.3 138.8 247.9 104.7 276.1 104.7 274.5 112.3 254.8 112.2 253.3 118.3 272.5 118.2 270.9 125"/>
+          <polygon class="a1" points="235.7 104.7 244.8 104.7 227 132.1 222.8 138.8 213.3 138.8 205.8 104.8 214.4 104.7 219.7 129.6 234.6 106.7 235.7 104.7"/>
+          <polygon class="a1" points="197.6 130 195.7 138.8 187.1 138.8 194.6 104.8 203.3 104.7 197.6 130"/>
+          <polygon class="a1" points="207.6 164.8 188.9 164.8 187.3 171.6 207.3 171.6 205.7 178.8 177.5 178.7 185 144.9 213.5 144.9 211.8 152.4 191.7 152.5 190.1 158.3 209.1 158.2 207.6 164.8"/>
+          <path class="a1" d="M170.3,166.7c-2.3.8-4.5,1-6.8.9h-11.3c0,0-2.4,11.1-2.4,11.1h-8.4s7.6-33.8,7.6-33.8h21c2,0,3.8.4,5.6,1,5,1.9,4,8.8,2.1,13.9s-3.8,5.7-7.3,6.8ZM170.5,156.4c.2-.9.2-2.1-.4-2.7s-1.1-1-2-1h-12.8c0,0-1.9,8.4-1.9,8.4h11.7c2.9-.1,4.9-1.7,5.5-4.7Z"/>
+          <path class="a1" d="M245.4,178.7h-9.8s-5.9-11.2-5.9-11.2l-5.4,5.5-1.6,1.5-4.4,4.2h-9.7s17.7-17.5,17.7-17.5l-5.3-9.5c-.7-2.5-2.4-4.2-3.6-6.7h9.5s6,10.5,6,10.5l5.9-6c.7-.7,1.4-1.3,1.7-2.4,1.1-.4,1.9-1,2.3-2.2h10.4s-11.8,11.6-11.8,11.6l-5.4,5.6,9.2,16.7Z"/>
+          <path class="a1" d="M128.3,172.3h-17.1c0,0-4.5,6.3-4.5,6.3h-9s22.8-33.6,22.8-33.6l10.9-.2,7.1,33.8h-9s-1.1-6.4-1.1-6.4ZM127,165.2l-2.6-12.9-8.7,13.1,11.3-.2Z"/>
+        </svg>
+        <div class="logo-cell-label">Full lockup · on dark</div>
+      </div>
+
+      <!-- Mark only -->
+      <div class="logo-cell logo-cell-dark">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.5 283.5" width="80">
+          <path style="fill:#ce4f37" d="M145.5,207.4c-22.6,24.3-51.7,41.1-84.7,41.3l-60.9.5,25.6-45.1,14.7-26.2,27.9-47.1,23.2-33.1c29.7-38.5,72.1-60.6,120.9-62.8l71.1-.6-14.5,60.9-34.2,153.7-36.9.2,24.3-108.5-64.6,56-12.1,10.9ZM127.4,179.9l70.6-64.8,51-46.1h-42.8c-31.8,2.3-59,18.2-81,40.6-10.6,10.8-17.7,23.2-25.6,36.3l-48.5,80.6c31-7.9,53.3-25.6,76.2-46.7Z"/>
+        </svg>
+        <div class="logo-cell-label">Mark only · on dark</div>
+      </div>
+
+      <!-- Full lockup on light -->
+      <div class="logo-cell logo-cell-light">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.5 283.5" width="180">
+          <defs><style>.b0{fill:#ce4f37}.b1{fill:#1a1a1a}</style></defs>
+          <path class="b0" d="M17.1,161.8c.8-1.4,1.8-2.3,2.1-3.8l3.3-5.6,3.5-5.7,3.8-6.3,3.9-6.4,5-7.2c5.1-7.2,13.9-13.6,22.1-17.4,6.1-2.7,12.5-4.4,19.3-4.4h24.6c0-.1-10.3,44.8-10.3,44.8l-6.4,28.8h-11.9c0,0,8.4-37.4,8.4-37.4l-24.2,21.2-7.5,6.5c-6.6,5.6-14.3,8.8-23,9.7H7.3c0,.1,9.7-16.8,9.7-16.8ZM24.2,171.5c8-2.4,15.5-6.3,22-12l27.5-23.9,22-19.6h-10.5c-10,0-19.5,2.7-27.6,8.5s-9,7.5-12.3,12.6l-4.1,6.5-16.9,27.9Z"/>
+          <path class="b1" d="M147.1,109.1c3.2,5.1,1.1,14.5-1.6,20.1s-3.4,5.2-6,6.9c-3.2,1.7-6.5,2.7-10.1,2.7h-20.4c0,0,7.7-34,7.7-34h20.3c3.1,0,5.9.9,8.5,2.5l1.6,1.8ZM137.6,127.3c1.8-3.2,2.6-6.5,2.7-10.1,0-2.6-1.9-4.6-4.6-4.6l-12.4-.2-4.3,19.1h11c3-.2,5.8-1.6,7.6-4.2Z"/>
+          <path class="b1" d="M174.7,138.8c-.9.1-1.6-.4-1.5-1.3l-4.7-9.9h-8.9c0,0-2.3,11.2-2.3,11.2h-8.8s3.6-16.1,3.6-16.1l4-17.9h21.3c2.4,0,4.4.6,6.6,1.4l2.6,2.8c1.3,3.1.8,6.4,0,9.5-1.3,4.5-4.6,7.7-9.3,8.4l5.7,11.9h-8.3ZM177.2,119.5c1.5-1.5,1.9-3.8,1.4-5.5s-1.5-1.5-2.5-1.5h-13.1s-1.9,8.5-1.9,8.5h11.9c1.4,0,3.1-.3,4.2-1.4Z"/>
+          <polygon class="b1" points="270.9 125 252 125 250.5 131.6 270.5 131.6 268.8 138.8 240.3 138.8 247.9 104.7 276.1 104.7 274.5 112.3 254.8 112.2 253.3 118.3 272.5 118.2 270.9 125"/>
+          <polygon class="b1" points="235.7 104.7 244.8 104.7 227 132.1 222.8 138.8 213.3 138.8 205.8 104.8 214.4 104.7 219.7 129.6 234.6 106.7 235.7 104.7"/>
+          <polygon class="b1" points="197.6 130 195.7 138.8 187.1 138.8 194.6 104.8 203.3 104.7 197.6 130"/>
+          <polygon class="b1" points="207.6 164.8 188.9 164.8 187.3 171.6 207.3 171.6 205.7 178.8 177.5 178.7 185 144.9 213.5 144.9 211.8 152.4 191.7 152.5 190.1 158.3 209.1 158.2 207.6 164.8"/>
+          <path class="b1" d="M170.3,166.7c-2.3.8-4.5,1-6.8.9h-11.3c0,0-2.4,11.1-2.4,11.1h-8.4s7.6-33.8,7.6-33.8h21c2,0,3.8.4,5.6,1,5,1.9,4,8.8,2.1,13.9s-3.8,5.7-7.3,6.8ZM170.5,156.4c.2-.9.2-2.1-.4-2.7s-1.1-1-2-1h-12.8c0,0-1.9,8.4-1.9,8.4h11.7c2.9-.1,4.9-1.7,5.5-4.7Z"/>
+          <path class="b1" d="M245.4,178.7h-9.8s-5.9-11.2-5.9-11.2l-5.4,5.5-1.6,1.5-4.4,4.2h-9.7s17.7-17.5,17.7-17.5l-5.3-9.5c-.7-2.5-2.4-4.2-3.6-6.7h9.5s6,10.5,6,10.5l5.9-6c.7-.7,1.4-1.3,1.7-2.4,1.1-.4,1.9-1,2.3-2.2h10.4s-11.8,11.6-11.8,11.6l-5.4,5.6,9.2,16.7Z"/>
+          <path class="b1" d="M128.3,172.3h-17.1c0,0-4.5,6.3-4.5,6.3h-9s22.8-33.6,22.8-33.6l10.9-.2,7.1,33.8h-9s-1.1-6.4-1.1-6.4ZM127,165.2l-2.6-12.9-8.7,13.1,11.3-.2Z"/>
+        </svg>
+        <div class="logo-cell-label" style="color:#888;">Full lockup · on light</div>
+      </div>
+    </div>
+
+    <div style="margin-bottom:16px;">
+      <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:10px;">Extracted brand colors from source files</div>
+      <div style="display:flex;gap:10px;">
+        <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;padding:12px 16px;display:flex;align-items:center;gap:10px;">
+          <div style="width:20px;height:20px;border-radius:3px;background:#CE4F37;flex-shrink:0;"></div>
+          <div><div style="font-size:11px;color:var(--dta-white);font-weight:600;">Apex Red</div><div style="font-size:10px;font-family:var(--font-mono);color:var(--dta-muted);">#CE4F37 · .st0</div></div>
+        </div>
+        <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;padding:12px 16px;display:flex;align-items:center;gap:10px;">
+          <div style="width:20px;height:20px;border-radius:3px;background:#E0DDD6;flex-shrink:0;"></div>
+          <div><div style="font-size:11px;color:var(--dta-white);font-weight:600;">Paddock White</div><div style="font-size:10px;font-family:var(--font-mono);color:var(--dta-muted);">#E0DDD6 · .st1</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="do-dont">
+      <div class="do-block">
+        <div class="do-label">Do</div>
+        <div class="do-text">Use on dark backgrounds. Keep the red mark at full opacity. Use the wordmark without the mark when space is tight horizontally. Use the mark alone at small square sizes (favicon, avatar).</div>
+      </div>
+      <div class="dont-block">
+        <div class="dont-label">Don't</div>
+        <div class="do-text">Never recolor either element. Never place on a mid-tone or busy background without a dark overlay. Never stretch, rotate, or add effects. Never use the light-background version as the default.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOTION -->
+  <div class="section">
+    <div class="section-label">Motion · Timing</div>
+    <div class="grid-2">
+      <div>
+        <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:14px;">Duration Scale</div>
+        <div class="motion-row"><div class="motion-label">instant</div><div class="motion-bar"><div class="motion-fill" style="width:8%;"></div></div><div class="motion-val">80ms</div></div>
+        <div class="motion-row"><div class="motion-label">fast</div><div class="motion-bar"><div class="motion-fill" style="width:18%;"></div></div><div class="motion-val">150ms</div></div>
+        <div class="motion-row"><div class="motion-label">default</div><div class="motion-bar"><div class="motion-fill" style="width:28%;"></div></div><div class="motion-val">220ms</div></div>
+        <div class="motion-row"><div class="motion-label">smooth</div><div class="motion-bar"><div class="motion-fill" style="width:40%;"></div></div><div class="motion-val">320ms</div></div>
+        <div class="motion-row"><div class="motion-label">page</div><div class="motion-bar"><div class="motion-fill" style="width:60%;"></div></div><div class="motion-val">480ms</div></div>
+        <div style="margin-top:14px;font-size:11px;color:var(--dta-muted);line-height:1.6;">Animate transform and opacity only. Never width, height, top, or left. No linear easing.</div>
+      </div>
+      <div>
+        <div style="font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--dta-muted);margin-bottom:14px;">Easing</div>
+        <div style="display:flex;flex-direction:column;gap:8px;">
+          <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:4px;padding:10px 12px;"><div style="font-size:10px;color:var(--dta-red);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.08em;">Enter</div><div style="font-size:11px;font-family:var(--font-mono);color:var(--dta-white);">cubic-bezier(0, 0, 0.2, 1)</div><div style="font-size:10px;color:var(--dta-muted);margin-top:2px;">ease-out · fast start, soft land</div></div>
+          <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:4px;padding:10px 12px;"><div style="font-size:10px;color:var(--dta-red);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.08em;">Exit</div><div style="font-size:11px;font-family:var(--font-mono);color:var(--dta-white);">cubic-bezier(0.4, 0, 1, 1)</div><div style="font-size:10px;color:var(--dta-muted);margin-top:2px;">ease-in · slow start, fast exit</div></div>
+          <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:4px;padding:10px 12px;"><div style="font-size:10px;color:var(--dta-red);margin-bottom:3px;text-transform:uppercase;letter-spacing:0.08em;">Move</div><div style="font-size:11px;font-family:var(--font-mono);color:var(--dta-white);">cubic-bezier(0.4, 0, 0.2, 1)</div><div style="font-size:10px;color:var(--dta-muted);margin-top:2px;">ease-in-out · repositioning</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOICE -->
+  <div class="section">
+    <div class="section-label">Voice &amp; Tone</div>
+    <div class="grid-2" style="margin-bottom:16px;">
+      <div class="tone-block"><div class="tone-head">Confident</div><div class="tone-text">We know the sport. Opinions are stated as opinions, not buried in qualifiers. We don't say "it seems like" when we mean "it is".</div></div>
+      <div class="tone-block"><div class="tone-head">Close to the action</div><div class="tone-text">Not a spectator brand. The writing feels like it came from someone who was there or is working their way there. Energy, not distance.</div></div>
+      <div class="tone-block"><div class="tone-head">Sharp, not cold</div><div class="tone-text">Direct. No fluff. But we're fans first, so there's passion underneath the precision. Never robotic, never corporate.</div></div>
+      <div class="tone-block"><div class="tone-head">Fan energy + professional form</div><div class="tone-text">We write like someone who loves the sport and reads the technical reports. Not a podcaster going off the cuff, not a press release.</div></div>
+    </div>
+    <div class="do-dont">
+      <div class="do-block"><div class="do-label">Write this</div><div class="do-text">"Ferrari's strategy lost them the race. The undercut window was there and they didn't take it."</div></div>
+      <div class="dont-block"><div class="dont-label">Not this</div><div class="do-text">"It's possible that Ferrari's strategic approach may have contributed to a suboptimal result in certain respects."</div></div>
+    </div>
+  </div>
+
+  <!-- IMAGERY -->
+  <div class="section">
+    <div class="section-label">Imagery Direction</div>
+    <div class="grid-3" style="margin-bottom:14px;">
+      <div class="tone-block"><div class="tone-head">Contrast-first</div><div class="tone-text" style="font-size:12px;">High contrast, graphic compositions. Controlled light source. Monochrome environment, single saturated subject. Never soft or pastel.</div></div>
+      <div class="tone-block"><div class="tone-head">Action or detail</div><div class="tone-text" style="font-size:12px;">Full-speed motion or extreme close-up technical detail. Avoid the generic wide paddock shot. The camera should feel like it earned its position.</div></div>
+      <div class="tone-block"><div class="tone-head">Color treatment</div><div class="tone-text" style="font-size:12px;">Desaturated backgrounds, single saturated hero element. Red-orange tones favored. Always dark overlay before text is placed over any image.</div></div>
+    </div>
+    <div style="background:var(--dta-card);border:1px solid var(--dta-border);border-radius:6px;padding:14px;display:flex;gap:12px;align-items:flex-start;">
+      <div style="width:3px;min-height:40px;background:var(--dta-red);border-radius:2px;flex-shrink:0;margin-top:2px;"></div>
+      <div style="font-size:12px;color:var(--dta-white);opacity:0.8;line-height:1.65;">The hero image reference nails it: black and white track, one orange car burning through. That's the brand. Dark world, one thing that cuts through it. Use that as the mental filter for every image decision.</div>
+    </div>
+  </div>
+
+</div>
